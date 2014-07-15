@@ -294,8 +294,15 @@ class LaravelLocalization
 		}
 
         $base_path = Request::getBaseUrl();
-		$parsed_url = parse_url($url);
-		if (empty($parsed_url['path']))
+	
+	$parsed_url = parse_url($url);
+	
+	# account for root url (single slash)
+        if($url=='/'){
+		return '/' . $locale;
+        }
+	
+	if (empty($parsed_url['path']))
 		{
 			$path = $parsed_url['path'] = "";
 		}
